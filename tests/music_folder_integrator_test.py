@@ -33,11 +33,26 @@ class TestStringMethods(unittest.TestCase):
             target_music_folder=music_folder,
             simulate=False)
 
-        # TODO compare precisely utilizing a tree data structure
-        new_album_folder = os.path.join(music_folder, "F S F", "W I B, T I H (2013)")
-        self.assertTrue(os.path.exists(new_album_folder), "The folder {} doesn't exist".format(new_album_folder))
-        copied_files = os.listdir(new_album_folder)
-        self.assertTrue(len(copied_files) > 0)  # TODO check for each mp3 file
+        expected_music_folder_tree = Tree()
+        expected_music_folder_tree.create_node(identifier="music_folder_1")
+        expected_music_folder_tree.create_node(identifier="F S F", parent="music_folder_1")
+        expected_music_folder_tree.create_node(identifier="W I B, T I H (2013)", parent="F S F")
+        expected_music_folder_tree.create_node(identifier="song1.mp3", parent="W I B, T I H (2013)")
+        expected_music_folder_tree.create_node(identifier="song2.mp3", parent="W I B, T I H (2013)")
+        expected_music_folder_tree.create_node(identifier="song3.mp3", parent="W I B, T I H (2013)")
+        print("Expecting the following music folder:")
+        expected_music_folder_tree.show()
+        self.compare_actual_folder_with_tree(TEST_OUTPUT, expected_music_folder_tree)
+
+    def compare_actual_folder_with_tree(self, root, tree):
+        root_name = tree.root
+        root_path = os.path.join(root, root_name)
+        print(root_path)
+        self.assertTrue(os.path.exists(root_path), "The path {} should exist, but doesn't".format(root_path))
+        children = tree.children(root_name)
+        for children in children:
+            subtree = tree.subtree(children.identifier)
+            self.compare_actual_folder_with_tree(root_path, subtree)
 
 
 def create_dummy_download_folder(root, tree):
