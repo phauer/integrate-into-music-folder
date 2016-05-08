@@ -1,20 +1,20 @@
-import os
-import shutil
 import unittest
 import sys
 from integrate_into_music_folder import music_folder_integrator
 from treelib import Node, Tree
-TEST_OUTPUT = os.path.abspath('..\\test_output\\')
+from path import path  # path.py
+
+TEST_OUTPUT = path('..\\test_output\\').abspath()
 
 
 class TestStringMethods(unittest.TestCase):
     def setUp(self):
-        shutil.rmtree(TEST_OUTPUT)
-        os.makedirs(TEST_OUTPUT)
+        TEST_OUTPUT.rmtree()
+        TEST_OUTPUT.makedirs()
 
     def test_happy_path(self):
         test_name = sys._getframe().f_code.co_name
-        root_path = os.path.join(TEST_OUTPUT, test_name)
+        root_path = TEST_OUTPUT.joinpath(test_name)
         clear(root_path)
         downloads_source_tree = Tree()
         downloads_source_tree.create_node(identifier="download_folder_1")
@@ -28,9 +28,9 @@ class TestStringMethods(unittest.TestCase):
         downloads_source_tree.show()
         created_download_root_folder = create_dummy_download_folder(root_path, downloads_source_tree)
 
-        music_folder = os.path.join(root_path, "music_folder_1")
-        if not os.path.exists(music_folder):
-            os.mkdir(music_folder)
+        music_folder = root_path.joinpath("music_folder_1")
+        if not music_folder.exists():
+            music_folder.mkdir()
 
         music_folder_integrator.integrate(
             source_download_folder=created_download_root_folder,
@@ -50,9 +50,9 @@ class TestStringMethods(unittest.TestCase):
 
     def compare_actual_folder_with_tree(self, root, tree):
         root_name = tree.root
-        root_path = os.path.join(root, root_name)
+        root_path = root.joinpath(root_name)
         print(root_path)
-        self.assertTrue(os.path.exists(root_path), "The path {} should exist, but doesn't".format(root_path))
+        self.assertTrue(root_path.exists(), "The path {} should exist, but doesn't".format(root_path))
         children = tree.children(root_name)
         for children in children:
             subtree = tree.subtree(children.identifier)
@@ -61,14 +61,14 @@ class TestStringMethods(unittest.TestCase):
 
 def create_dummy_download_folder(root, tree):
     root_name = tree.root
-    root_path = os.path.join(root, root_name)
+    root_path = root.joinpath(root_name)
 
-    if not os.path.exists(root_path):
+    if not root_path.exists():
         print("Creating {}".format(root_path))
         if root_name.endswith(".mp3"):
             open(root_path, 'a').close()
         else:
-            os.mkdir(root_path)
+            root_path.mkdir()
 
     children = tree.children(root_name)
     for children in children:
@@ -78,9 +78,9 @@ def create_dummy_download_folder(root, tree):
 
 
 def clear(folder):
-    if os.path.exists(folder):
-        shutil.rmtree(folder)
-    os.makedirs(folder)
+    if folder.exists():
+        folder.rmtree()
+    folder.makedirs()
 
 
 if __name__ == '__main__':
