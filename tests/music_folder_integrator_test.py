@@ -1,9 +1,9 @@
 import os
 import shutil
 import unittest
+import sys
 from integrate_into_music_folder import music_folder_integrator
 from treelib import Node, Tree
-
 TEST_OUTPUT = os.path.abspath('..\\test_output\\')
 
 
@@ -12,7 +12,10 @@ class TestStringMethods(unittest.TestCase):
         shutil.rmtree(TEST_OUTPUT)
         os.makedirs(TEST_OUTPUT)
 
-    def test_print(self):
+    def test_happy_path(self):
+        test_name = sys._getframe().f_code.co_name
+        root_path = os.path.join(TEST_OUTPUT, test_name)
+        clear(root_path)
         downloads_source_tree = Tree()
         downloads_source_tree.create_node(identifier="download_folder_1")
         downloads_source_tree.create_node(identifier="Should Not Be Used", parent="download_folder_1")
@@ -23,10 +26,11 @@ class TestStringMethods(unittest.TestCase):
         downloads_source_tree.create_node(identifier="song3.mp3", parent="F S F - W I B, T I H (2013)")
         print("Creating test downloads folder:")
         downloads_source_tree.show()
-        created_download_root_folder = create_dummy_download_folder(TEST_OUTPUT, downloads_source_tree)
+        created_download_root_folder = create_dummy_download_folder(root_path, downloads_source_tree)
 
-        music_folder = os.path.join(TEST_OUTPUT, "music_folder_1")
-        clear(music_folder)
+        music_folder = os.path.join(root_path, "music_folder_1")
+        if not os.path.exists(music_folder):
+            os.mkdir(music_folder)
 
         music_folder_integrator.integrate(
             source_download_folder=created_download_root_folder,
@@ -42,7 +46,7 @@ class TestStringMethods(unittest.TestCase):
         expected_music_folder_tree.create_node(identifier="song3.mp3", parent="W I B, T I H (2013)")
         print("Expecting the following music folder:")
         expected_music_folder_tree.show()
-        self.compare_actual_folder_with_tree(TEST_OUTPUT, expected_music_folder_tree)
+        self.compare_actual_folder_with_tree(root_path, expected_music_folder_tree)
 
     def compare_actual_folder_with_tree(self, root, tree):
         root_name = tree.root
@@ -73,10 +77,10 @@ def create_dummy_download_folder(root, tree):
     return root_path
 
 
-def clear(music_folder):
-    if os.path.exists(music_folder):
-        shutil.rmtree(music_folder)
-    os.makedirs(music_folder)
+def clear(folder):
+    if os.path.exists(folder):
+        shutil.rmtree(folder)
+    os.makedirs(folder)
 
 
 if __name__ == '__main__':
