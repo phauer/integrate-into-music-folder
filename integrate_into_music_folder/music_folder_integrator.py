@@ -2,6 +2,7 @@ import album_parser
 from path import path # path.py
 
 
+# TODO create CLI
 # TODO use virtual env
 # TODO use PyBuilder
 # TODO add year if not present

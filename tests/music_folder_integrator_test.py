@@ -1,10 +1,12 @@
 import unittest
 import sys
 from integrate_into_music_folder import music_folder_integrator
-from treelib import Node, Tree
+from treelib import Tree
 from path import path  # path.py
 
 TEST_OUTPUT = path('..\\test_output\\').abspath()
+
+# TODO test simulate
 
 
 class TestStringMethods(unittest.TestCase):
@@ -66,7 +68,7 @@ def create_dummy_download_folder(root, tree):
     if not root_path.exists():
         print("Creating {}".format(root_path))
         if root_name.endswith(".mp3"):
-            open(root_path, 'a').close()
+            root_path.touch()
         else:
             root_path.mkdir()
 
