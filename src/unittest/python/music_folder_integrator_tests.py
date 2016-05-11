@@ -1,10 +1,12 @@
-import unittest
 import sys
-from integrate_into_music_folder import music_folder_integrator
-from treelib import Tree
-from path import path  # path.py
+import unittest
 
-TEST_OUTPUT = path('..\\test_output\\').abspath()
+from path import path  # path.py
+from treelib import Tree
+
+import music_folder_integrator
+
+TEST_OUTPUT = path('..\\..\\..\\test_output\\').abspath()
 
 # TODO test simulate
 

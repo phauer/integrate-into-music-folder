@@ -1,5 +1,4 @@
 import album_parser
-from path import path # path.py
 
 
 # TODO create CLI
