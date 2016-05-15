@@ -1,4 +1,4 @@
-import music_folder_integrator
+import integrator
 import click
 from os.path import expanduser
 from path import path # path.py

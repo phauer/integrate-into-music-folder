@@ -4,13 +4,13 @@ import unittest
 from path import path  # path.py
 from treelib import Tree
 
-import music_folder_integrator
+from music_folder_integrator import integrator
 
-TEST_OUTPUT = path('..\\..\\..\\test_output\\').abspath()
+TEST_OUTPUT = path('test_output').abspath()
+# set "Working Directory" to project root, when running this test directly out of the IDE
+
 
 # TODO test simulate
-
-
 class TestStringMethods(unittest.TestCase):
     def setUp(self):
         TEST_OUTPUT.rmtree()
@@ -36,7 +36,7 @@ class TestStringMethods(unittest.TestCase):
         if not music_folder.exists():
             music_folder.mkdir()
 
-        music_folder_integrator.integrate(
+        integrator.integrate(
             source_download_folder=created_download_root_folder,
             target_music_folder=music_folder,
             simulate=False)

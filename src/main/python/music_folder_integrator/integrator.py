@@ -1,9 +1,7 @@
-import album_parser
-
+from music_folder_integrator import album_parser
 
 # TODO create CLI
 # TODO use virtual env
-# TODO use PyBuilder
 # TODO add year if not present
 def integrate(source_download_folder, target_music_folder, simulate):
     print("Analyzing {}. Target: {}".format(source_download_folder, target_music_folder))
