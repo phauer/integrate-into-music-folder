@@ -9,7 +9,6 @@ TEST_OUTPUT = path('test_output').abspath()
 # set "Working Directory" to project root, when running this test directly out of the IDE
 
 
-# TODO test simulate
 class TestStringMethods(unittest.TestCase):
     def setUp(self):
         TEST_OUTPUT.rmtree()
@@ -36,7 +35,7 @@ class TestStringMethods(unittest.TestCase):
         integrator.integrate(
             source_download_folder=created_download_root_folder,
             target_music_folder=music_folder,
-            simulate=False)
+            ask_before_copy=False)
 
         expected_music_folder_tree = Tree()
         expected_music_folder_tree.create_node(identifier="music_folder")
@@ -61,7 +60,7 @@ class TestStringMethods(unittest.TestCase):
             integrator.integrate(
                 source_download_folder=created_download_root_folder,
                 target_music_folder=music_folder,
-                simulate=False)
+                ask_before_copy=False)
 
     def compare_actual_folder_with_tree_with_output(self, root_path, expected_music_folder_tree):
         print("Expecting the following music folder:")

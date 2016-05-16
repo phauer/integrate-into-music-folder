@@ -10,8 +10,8 @@ from music_folder_integrator import integrator
 @click.command()
 @click.option('--src', type=click.Path(exists=True, file_okay=False, dir_okay=True), default=expanduser("~\Downloads"), prompt="Source download folder", help='Source download folder. e.g. C:\\Users\\User\\Downloads')
 @click.option('--dist', type=click.Path(exists=True, file_okay=False, dir_okay=True), default=expanduser("~\Music"), prompt="Target music folder", help='Target music folder. e.g. C:\\Users\\User\\Music')
-@click.option('--simulate', is_flag=True, default=False, help="Only output the necessary actions. Don't do it")
-def execute(src, dist, simulate):
+@click.option('--ask-before-copy', is_flag=True, default=False, help="Ask the user before the actual coping happens")
+def execute(src, dist, ask_before_copy):
     """Integrates a album folder in the download folder into your music library."""
 
     src_path = path(src)
@@ -20,7 +20,7 @@ def execute(src, dist, simulate):
         integrator.integrate(
             source_download_folder=src_path,
             target_music_folder=dist_path,
-            simulate=simulate)
+            ask_before_copy=ask_before_copy)
     except integrator.IntegrationError as e:
         print("An error occurred: {}".format(e))
 
