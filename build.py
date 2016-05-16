@@ -10,7 +10,5 @@ default_task = ['clean', 'publish']
 
 @init
 def set_properties(project):
-    # project.depends_on_requirements("requirements.txt")
-    project.depends_on('click')
-    project.depends_on('path.py')
-    project.depends_on('treelib')
+    project.depends_on_requirements("requirements.txt")
+
