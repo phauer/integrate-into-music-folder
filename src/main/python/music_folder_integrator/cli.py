@@ -1,16 +1,14 @@
 import sys
+import click
+from path import path  # path.py
+from os.path import expanduser
 sys.path.append("..")
 # print(sys.path)
-
-import click
 from music_folder_integrator import integrator
-from os.path import expanduser
-from path import path # path.py
 
 
 # python cli.py --simulate --src=C:\Users\Ahoi\Downloads\JDownloader --dist=D:\Music
 
-# TODO remember last choice and use it as default
 @click.command()
 @click.option('--src', type=click.Path(exists=True, file_okay=False, dir_okay=True), default=expanduser("~\Downloads"), prompt="Source download folder", help='Source download folder. e.g. C:\\Users\\User\\Downloads')
 @click.option('--dist', type=click.Path(exists=True, file_okay=False, dir_okay=True), default=expanduser("~\Music"), prompt="Target music folder", help='Target music folder. e.g. C:\\Users\\User\\Music')

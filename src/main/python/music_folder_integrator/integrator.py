@@ -1,8 +1,6 @@
 from music_folder_integrator import album_parser
 
-# TODO create CLI
-# TODO use virtual env
-# TODO add year if not present
+
 def integrate(source_download_folder, target_music_folder, simulate):
     print("Analyzing {}. Target: {}".format(source_download_folder, target_music_folder))
     latest_folder = source_download_folder.joinpath(get_latest_folder(source_download_folder))

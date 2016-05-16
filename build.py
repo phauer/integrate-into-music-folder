@@ -7,5 +7,3 @@ use_plugin("python.unittest")
 # use_plugin("python.install_dependencies")
 
 default_task = "publish"
-
-# TODO try setup.py

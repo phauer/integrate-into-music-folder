@@ -1,0 +1,4 @@
+# TODO create CLI
+# TODO use virtual env
+# TODO add year if not present
+# TODO try setup.py
