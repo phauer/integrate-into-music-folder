@@ -1,27 +1,33 @@
+import click
 from music_folder_integrator import album_parser
 
 
 def integrate(source_download_folder, target_music_folder, simulate):
     if not target_music_folder.exists():
         raise IntegrationError("The target folder {} doesn't exist.".format(target_music_folder))
-    print("Analyzing {}. Target: {}".format(source_download_folder, target_music_folder))
     latest_folder = source_download_folder.joinpath(get_latest_folder(source_download_folder))
     print("Analyzing latest file {}".format(latest_folder))
     if len(latest_folder.listdir()) == 0:
         raise IntegrationError("The latest folder {} has no child folder.".format(latest_folder))
     downloads_album_folder = latest_folder.listdir()[0]
-    print("Parsing album folder name '{}'".format(downloads_album_folder.basename()))
     album = album_parser.parse(downloads_album_folder.basename(), "-")
-    print("Parsing result: {}".format(album))
+    print("Parsed album folder name {}. Result: {}".format(downloads_album_folder.basename(), album))
     target_interpret_folder = create_interpret_folder_if_necessary(album.interpret, target_music_folder, simulate)
 
-    print("Moving {} into {}".format(downloads_album_folder, target_interpret_folder))
-    downloads_album_folder.move(target_interpret_folder)
-
-    target_album_folder_old_name = target_interpret_folder.joinpath(downloads_album_folder.basename())
     wanted_target_album_folder = target_interpret_folder.joinpath(album.name)
-    print("Renaming from {} to {}".format(target_album_folder_old_name, wanted_target_album_folder))
-    target_album_folder_old_name.rename(wanted_target_album_folder)
+    if wanted_target_album_folder.exists():
+        raise IntegrationError("The target album folder {} already exists.".format(wanted_target_album_folder))
+    print("I'm going to copy \n\t{} \n\tto \n\t{}".format(downloads_album_folder, wanted_target_album_folder))
+    if simulate:
+        print("This was only a simulation. Nothing happened so far.")
+    else:
+        if click.confirm('Are you okay with this?'):
+            downloads_album_folder.copytree(wanted_target_album_folder)
+            click.echo("Copied successfully")
+            print("Cleanup: Removing old folder in downloads folder: {}".format(downloads_album_folder))
+            downloads_album_folder.rmtree()
+        else:
+            click.echo("Process was aborted.")
 
 
 def create_interpret_folder_if_necessary(interpret, target_music_folder, simulate):

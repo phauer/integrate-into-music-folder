@@ -1,4 +1,4 @@
 # TODO create CLI
 # TODO use virtual env
-# TODO add year if not present
+# TODO add year if not present (add parameter for this. if not provided/default: current year
 # TODO try setup.py
