@@ -1,4 +1,4 @@
 # TODO create CLI
-# TODO use virtual env
+# TODO use virtual env (afterwards build.py: project.depends_on_requirements("requirements.txt"))
 # TODO add year if not present (add parameter for this. if not provided/default: current year
 # TODO try setup.py
