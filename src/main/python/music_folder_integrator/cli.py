@@ -1,5 +1,9 @@
-import integrator
+import sys
+sys.path.append("..")
+# print(sys.path)
+
 import click
+from music_folder_integrator import integrator
 from os.path import expanduser
 from path import path # path.py
 
@@ -13,6 +17,7 @@ from path import path # path.py
 @click.option('--simulate', is_flag=True, default=False, help="Only output the necessary actions. Don't do it")
 def execute(src, dist, simulate):
     """Integrates a album folder in the download folder into your music library."""
+
     # TODO use click.confirm to ask for final permission before actual copying. maybe this makes simulate mode obsolete.
     # value = click.prompt('writer peter')
     # if value == "peter":
@@ -25,7 +30,7 @@ def execute(src, dist, simulate):
     click.echo('dist: {}'.format(dist_path))
     click.echo('simulate: {}'.format(simulate))
     # TODO fix error
-    # music_folder_integrator.integrate(
+    # integrator.integrate(
     #     source_download_folder=src_path,
     #     target_music_folder=dist_path,
     #     simulate=simulate)
