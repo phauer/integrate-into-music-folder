@@ -2,9 +2,13 @@ from music_folder_integrator import album_parser
 
 
 def integrate(source_download_folder, target_music_folder, simulate):
+    if not target_music_folder.exists():
+        raise IntegrationError("The target folder {} doesn't exist.".format(target_music_folder))
     print("Analyzing {}. Target: {}".format(source_download_folder, target_music_folder))
     latest_folder = source_download_folder.joinpath(get_latest_folder(source_download_folder))
     print("Analyzing latest file {}".format(latest_folder))
+    if len(latest_folder.listdir()) == 0:
+        raise IntegrationError("The latest folder {} has no child folder.".format(latest_folder))
     downloads_album_folder = latest_folder.listdir()[0]
     print("Parsing album folder name '{}'".format(downloads_album_folder.basename()))
     album = album_parser.parse(downloads_album_folder.basename(), "-")
@@ -36,3 +40,10 @@ def get_latest_folder(dir_path):
     files.sort(key=lambda file: dir_path.joinpath(file).getctime(), reverse=True)
     return files[0]
 
+
+class IntegrationError(Exception):
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)

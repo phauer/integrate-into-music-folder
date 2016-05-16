@@ -27,11 +27,13 @@ def execute(src, dist, simulate):
     click.echo('src: {}'.format(src_path))
     click.echo('dist: {}'.format(dist_path))
     click.echo('simulate: {}'.format(simulate))
-    # TODO fix error
-    # integrator.integrate(
-    #     source_download_folder=src_path,
-    #     target_music_folder=dist_path,
-    #     simulate=simulate)
+    try:
+        integrator.integrate(
+            source_download_folder=src_path,
+            target_music_folder=dist_path,
+            simulate=simulate)
+    except integrator.IntegrationError as e:
+        print("An error occurred: {}".format(e))
 
 if __name__ == '__main__':
     execute()
