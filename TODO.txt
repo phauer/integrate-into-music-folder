@@ -1,4 +1,1 @@
-# TODO fix venv usage in intelliJ. test if virtualenv really works: delete and reinstall deps.
-# TODO create CLI
-# TODO add year if not present (add parameter for this. if not provided/default: current year
-# TODO try setup.py
+# TODO add year if not present (add parameter for this. if not provided/default: current year)

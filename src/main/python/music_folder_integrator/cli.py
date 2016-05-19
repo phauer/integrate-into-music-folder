@@ -1,6 +1,6 @@
 import sys
 import click
-from path import path  # path.py
+from path import path
 from os.path import expanduser
 sys.path.append("..")
 # print(sys.path)
