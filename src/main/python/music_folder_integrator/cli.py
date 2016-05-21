@@ -22,7 +22,8 @@ def execute(src, dist, ask_before_copy):
             source_download_folder=src_path,
             target_music_folder=dist_path,
             ask_before_copy=ask_before_copy)
-        subprocess.Popen(r'explorer /select,"{}"'.format(new_target_album_folder))
+        if new_target_album_folder is not None:
+            subprocess.Popen(r'explorer /select,"{}"'.format(new_target_album_folder.abspath()))
     except integrator.IntegrationError as e:
         print("An error occurred: {}".format(e))
 
