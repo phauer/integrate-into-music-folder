@@ -2,6 +2,7 @@ import sys
 import click
 from path import path
 from os.path import expanduser
+import subprocess
 sys.path.append("..")
 # print(sys.path)
 from music_folder_integrator import integrator
@@ -17,10 +18,11 @@ def execute(src, dist, ask_before_copy):
     src_path = path(src)
     dist_path = path(dist)
     try:
-        integrator.integrate(
+        new_target_album_folder = integrator.integrate(
             source_download_folder=src_path,
             target_music_folder=dist_path,
             ask_before_copy=ask_before_copy)
+        subprocess.Popen(r'explorer /select,"{}"'.format(new_target_album_folder))
     except integrator.IntegrationError as e:
         print("An error occurred: {}".format(e))
 

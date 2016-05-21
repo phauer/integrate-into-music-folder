@@ -23,6 +23,7 @@ def integrate(source_download_folder, target_music_folder, ask_before_copy):
         click.echo("Copied successfully")
         print("Cleanup: Removing old folder in downloads folder: {}".format(latest_folder))
         latest_folder.rmtree()
+        return wanted_target_album_folder
 
 
 def create_interpret_folder_if_necessary(interpret, target_music_folder, ask_before_copy):
