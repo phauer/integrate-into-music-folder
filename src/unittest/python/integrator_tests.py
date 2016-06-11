@@ -9,7 +9,7 @@ TEST_OUTPUT = path('test_output').abspath()
 # set "Working Directory" to project root, when running this test directly out of the IDE
 
 
-class TestStringMethods(unittest.TestCase):
+class IntegratorTests(unittest.TestCase):
     def setUp(self):
         TEST_OUTPUT.rmtree()
         TEST_OUTPUT.makedirs()
@@ -44,6 +44,29 @@ class TestStringMethods(unittest.TestCase):
         expected_music_folder_tree.create_node(identifier="song1.mp3", parent="W I B, T I H (2013)")
         expected_music_folder_tree.create_node(identifier="song2.mp3", parent="W I B, T I H (2013)")
         expected_music_folder_tree.create_node(identifier="song3.mp3", parent="W I B, T I H (2013)")
+        self.compare_actual_folder_with_tree_with_output(self.root_path, expected_music_folder_tree)
+
+    def test_multiple_delimiter_remove_underscore(self):
+        downloads_source_tree = Tree()
+        downloads_source_tree.create_node(identifier="download_folder")
+        downloads_source_tree.create_node(identifier="S P-T O F T T-2016-C4", parent="download_folder")
+        downloads_source_tree.create_node(identifier="S_P-T_O_F_T_T-2016-C4", parent="S P-T O F T T-2016-C4")
+        downloads_source_tree.create_node(identifier="song1.mp3", parent="S_P-T_O_F_T_T-2016-C4")
+        created_download_root_folder = create_dummy_download_folder_with_output(self.root_path, downloads_source_tree)
+
+        music_folder = self.root_path.joinpath("music_folder")
+        music_folder.mkdir()
+
+        integrator.integrate(
+            source_download_folder=created_download_root_folder,
+            target_music_folder=music_folder,
+            ask_before_copy=False)
+
+        expected_music_folder_tree = Tree()
+        expected_music_folder_tree.create_node(identifier="music_folder")
+        expected_music_folder_tree.create_node(identifier="S P", parent="music_folder")
+        expected_music_folder_tree.create_node(identifier="T O F T T-2016-C4", parent="S P")
+        expected_music_folder_tree.create_node(identifier="song1.mp3", parent="T O F T T-2016-C4")
         self.compare_actual_folder_with_tree_with_output(self.root_path, expected_music_folder_tree)
 
     def test_latest_folder_contains_nothing(self):

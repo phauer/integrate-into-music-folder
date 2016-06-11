@@ -16,8 +16,7 @@ class AlbumParseError(Exception):
 
 
 def parse(string, delimiter):
-    parts = string.split(delimiter)
-    if len(parts) > 2:
-        raise AlbumParseError("Couldn't parse '{}' because it contains the delimiter '{}' more than one time!".format(string, delimiter))
-    trimmed = [part.strip() for part in parts]
-    return Album(trimmed[0], trimmed[1])
+    index_of_first_delimiter = string.index(delimiter)
+    interpret = string[:index_of_first_delimiter].strip().replace("_", " ")
+    album_name = string[index_of_first_delimiter + 1:].strip().replace("_", " ")
+    return Album(interpret, album_name)
