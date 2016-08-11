@@ -33,7 +33,6 @@ $ deactivate # deactivates venv
 - Python Facet
   - File > Project Structure > Facets. Add Python Facet and set interpreter of venv
 - `Project Structure... > Modules`. Mark `src/main/python` and `src/unittest/python` as source folder. Mark `target` as excluded folder.
-- IntelliJ doesn't compile my code. Code changes doesn't take effect. `File > Settings > Build, Execution, Deployment > Compiler`. Check "Make project automatically".
 
 ### Installation
 - `pip install TODO-1.0.dev0.tar.gz`
