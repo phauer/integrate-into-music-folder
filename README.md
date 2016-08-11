@@ -1,12 +1,12 @@
 # integrate-into-music-folder
-Still under development...
+TODO description, installation and usage
 
 ## Development
 
 ### Getting Started
 - requires Python 3.5. Test with `python3 --version`.
 
-Install pip and venv if you havn't already.
+Install pip and venv if you haven't already.
 ```
 $ sudo apt install python-pip
 $ sudo apt install python3-venv # or sudo apt install virtualenv
