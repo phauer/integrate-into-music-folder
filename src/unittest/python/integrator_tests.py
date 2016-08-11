@@ -1,11 +1,13 @@
-import unittest
 import time
+import unittest
+
 from path import path
 from treelib import Tree
 
-from music_folder_integrator import integrator
+from integrate_into_music_folder import integrator
 
-TEST_OUTPUT = path('../../../test_output').abspath()
+TEST_OUTPUT = path('test_output').abspath()
+# set "Working Directory" to project root, when running this test directly out of the IDE
 
 
 class IntegratorTests(unittest.TestCase):

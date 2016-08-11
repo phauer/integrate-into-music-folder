@@ -1,5 +1,19 @@
 # integrate-into-music-folder
-TODO description, installation and usage
+TODO description
+
+## Installation and Usage
+```
+# git clone and cd into dir
+$ pyb
+$ pip install target/dist/integrate-into-music-folder-1.0.dev0/dist/integrate-into-music-folder-1.0.dev0.tar.gz 
+# optionally add "~/.local/bin" to PATH
+$ integrate-into-music-folder --help
+```
+
+### Deinstallation
+```
+pip uninstall integrate-into-music-folder
+```
 
 ## Development
 
@@ -33,11 +47,3 @@ $ deactivate # deactivates venv
 - Python Facet
   - File > Project Structure > Facets. Add Python Facet and set interpreter of venv
 - `Project Structure... > Modules`. Mark `src/main/python` and `src/unittest/python` as source folder. Mark `target` as excluded folder.
-
-### Installation
-- `pip install TODO-1.0.dev0.tar.gz`
-- add `~/.local/bin` to PATH
-- call via `TODO.py`
-
-### Uninstallation
-`pip uninstall TODO`

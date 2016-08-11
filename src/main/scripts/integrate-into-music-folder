@@ -1,20 +1,18 @@
-import sys
+#!/usr/bin/env python3
+import subprocess
+from os.path import expanduser
+
 import click
 from path import path
-from os.path import expanduser
-import subprocess
-sys.path.append("..")
-# print(sys.path)
-from music_folder_integrator import integrator
+
+from integrate_into_music_folder import integrator
 
 
-@click.command()
-@click.option('--src', type=click.Path(exists=True, file_okay=False, dir_okay=True), default=expanduser("~\Downloads"), prompt="Source download folder", help='Source download folder. e.g. C:\\Users\\User\\Downloads')
-@click.option('--dist', type=click.Path(exists=True, file_okay=False, dir_okay=True), default=expanduser("~\Music"), prompt="Target music folder", help='Target music folder. e.g. C:\\Users\\User\\Music')
+@click.command(help="Integrates a album folder in the download folder into your music library.")
+@click.option('--src', type=click.Path(exists=True, file_okay=False, dir_okay=True), default=expanduser("~\Downloads"), prompt="Source download folder", help='Source download folder.')
+@click.option('--dist', type=click.Path(exists=True, file_okay=False, dir_okay=True), default=expanduser("~\Music"), prompt="Target music folder", help='Target music folder.')
 @click.option('--ask-before-copy', is_flag=True, default=False, help="Ask the user before the actual coping happens")
 def execute(src, dist, ask_before_copy):
-    """Integrates a album folder in the download folder into your music library."""
-
     src_path = path(src)
     dist_path = path(dist)
     try:

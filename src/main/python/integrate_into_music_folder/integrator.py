@@ -1,6 +1,6 @@
 import click
-from music_folder_integrator import album_parser
 from path import path
+from integrate_into_music_folder import album_parser
 
 
 def integrate(source_download_folder: path, target_music_folder: path, ask_before_copy: bool):

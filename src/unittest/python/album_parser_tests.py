@@ -1,6 +1,5 @@
 import unittest
-
-from music_folder_integrator import album_parser
+from integrate_into_music_folder import album_parser
 
 
 class AlbumParserTests(unittest.TestCase):
