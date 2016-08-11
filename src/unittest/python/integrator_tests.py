@@ -5,13 +5,14 @@ from treelib import Tree
 
 from music_folder_integrator import integrator
 
-TEST_OUTPUT = path('test_output').abspath()
+TEST_OUTPUT = path('../../../test_output').abspath()
 # set "Working Directory" to project root, when running this test directly out of the IDE
 
 
 class IntegratorTests(unittest.TestCase):
     def setUp(self):
-        TEST_OUTPUT.rmtree()
+        if TEST_OUTPUT.exists():
+            TEST_OUTPUT.rmtree()
         TEST_OUTPUT.makedirs()
         test_name = self.id().split(".")[-1]
         self.root_path = TEST_OUTPUT.joinpath(test_name)
