@@ -1,2 +1,1 @@
-PyBuilder==0.11.8
 tblib==1.3.0
