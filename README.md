@@ -26,12 +26,12 @@ $ deactivate # deactivates venv
 
 ### Setting up IntelliJ IDEA/PyCharm
 - Configure the venv:
--- File > Project Structure > Project > Project SDK > New
--- Python SDK > Create VirtualEnv
--- Set "Base Interpreter" to the python3 under <project>/venv/bin/python3.5
--- Set "Location" to <project>/venv
+  - File > Project Structure > Project > Project SDK > New
+  - Python SDK > Create VirtualEnv
+  - Set "Base Interpreter" to the python3 under <project>/venv/bin/python3.5
+  - Set "Location" to <project>/venv
 - Python Facet
--- File > Project Structure > Facets. Add Python Facet and set interpreter of venv
+  - File > Project Structure > Facets. Add Python Facet and set interpreter of venv
 - `Project Structure... > Modules`. Mark `src/main/python` and `src/unittest/python` as source folder. Mark `target` as excluded folder.
 - IntelliJ doesn't compile my code. Code changes doesn't take effect. `File > Settings > Build, Execution, Deployment > Compiler`. Check "Make project automatically".
 
