@@ -1,5 +1,5 @@
 import unittest
-
+import time
 from path import path
 from treelib import Tree
 
@@ -79,7 +79,7 @@ class IntegratorTests(unittest.TestCase):
         music_folder = self.root_path.joinpath("music_folder")
         music_folder.mkdir()
 
-        with self.assertRaisesRegex(integrator.IntegrationError, "'The latest folder .* has no child folder.'"):
+        with self.assertRaisesRegex(integrator.IntegrationError, "The latest folder '.*' has no child folder."):
             integrator.integrate(
                 source_download_folder=created_download_root_folder,
                 target_music_folder=music_folder,
@@ -118,6 +118,7 @@ def create_dummy_download_folder(root: path, tree: Tree) -> path:
             root_path.touch()
         else:
             root_path.mkdir()
+        time.sleep(0.01)  # sleep to ensure that the created folders don't have the same ctime
 
     children = tree.children(root_name)
     for children in children:

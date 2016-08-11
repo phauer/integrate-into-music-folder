@@ -5,11 +5,11 @@ from path import path
 
 def integrate(source_download_folder: path, target_music_folder: path, ask_before_copy: bool):
     if not target_music_folder.exists():
-        raise IntegrationError("The target folder {} doesn't exist.".format(target_music_folder))
+        raise IntegrationError("The target folder '{}' doesn't exist.".format(target_music_folder))
     latest_folder = source_download_folder.joinpath(get_latest_folder(source_download_folder))
     print("Analyzing latest file {}".format(latest_folder))
     if len(latest_folder.listdir()) == 0:
-        raise IntegrationError("The latest folder {} has no child folder.".format(latest_folder))
+        raise IntegrationError("The latest folder '{}' has no child folder.".format(latest_folder))
     downloads_album_folder = latest_folder.listdir()[0]
     album = album_parser.parse(downloads_album_folder.basename(), "-")
     print("Parsed album folder name {}. Result: {}".format(downloads_album_folder.basename(), album))
