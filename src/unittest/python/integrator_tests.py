@@ -6,7 +6,6 @@ from treelib import Tree
 from music_folder_integrator import integrator
 
 TEST_OUTPUT = path('../../../test_output').abspath()
-# set "Working Directory" to project root, when running this test directly out of the IDE
 
 
 class IntegratorTests(unittest.TestCase):
