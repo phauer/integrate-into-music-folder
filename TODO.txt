@@ -1,1 +1,5 @@
+# TODO try installation of app via pip + add documentation in README
+# TODO move cli to scripts class; remove bat and shell file
+# TODO add type hinting.
+
 # TODO add year if not present (add parameter for this. if not provided/default: current year)
