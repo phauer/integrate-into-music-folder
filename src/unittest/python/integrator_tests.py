@@ -1,6 +1,6 @@
 import unittest
 
-from path import path  # path.py
+from path import path
 from treelib import Tree
 
 from music_folder_integrator import integrator
@@ -85,12 +85,12 @@ class IntegratorTests(unittest.TestCase):
                 target_music_folder=music_folder,
                 ask_before_copy=False)
 
-    def compare_actual_folder_with_tree_with_output(self, root_path, expected_music_folder_tree):
+    def compare_actual_folder_with_tree_with_output(self, root_path: path, expected_music_folder_tree: Tree):
         print("Expecting the following music folder:")
         expected_music_folder_tree.show()
         self.compare_actual_folder_with_tree(root_path, expected_music_folder_tree)
 
-    def compare_actual_folder_with_tree(self, root, tree):
+    def compare_actual_folder_with_tree(self, root: path, tree: Tree):
         root_name = tree.root
         root_path = root.joinpath(root_name)
         print(root_path)
@@ -101,14 +101,14 @@ class IntegratorTests(unittest.TestCase):
             self.compare_actual_folder_with_tree(root_path, subtree)
 
 
-def create_dummy_download_folder_with_output(root_path, downloads_source_tree):
+def create_dummy_download_folder_with_output(root_path: path, downloads_source_tree: Tree) -> path:
     print("Creating test downloads folder:")
     downloads_source_tree.show()
     created_download_root_folder = create_dummy_download_folder(root_path, downloads_source_tree)
     return created_download_root_folder
 
 
-def create_dummy_download_folder(root, tree):
+def create_dummy_download_folder(root: path, tree: Tree) -> path:
     root_name = tree.root
     root_path = root.joinpath(root_name)
 
@@ -126,7 +126,7 @@ def create_dummy_download_folder(root, tree):
     return root_path
 
 
-def clear(folder):
+def clear(folder: path):
     if folder.exists():
         folder.rmtree()
     folder.makedirs()

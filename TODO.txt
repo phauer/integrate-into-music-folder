@@ -1,5 +1,5 @@
 # TODO try installation of app via pip + add documentation in README
 # TODO move cli to scripts class; remove bat and shell file
-# TODO add type hinting.
+# TODO use python-own oo-style path api (since 3.4) instead of path.py
 
 # TODO add year if not present (add parameter for this. if not provided/default: current year)

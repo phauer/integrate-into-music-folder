@@ -1,8 +1,9 @@
 import click
 from music_folder_integrator import album_parser
+from path import path
 
 
-def integrate(source_download_folder, target_music_folder, ask_before_copy):
+def integrate(source_download_folder: path, target_music_folder: path, ask_before_copy: bool):
     if not target_music_folder.exists():
         raise IntegrationError("The target folder {} doesn't exist.".format(target_music_folder))
     latest_folder = source_download_folder.joinpath(get_latest_folder(source_download_folder))
@@ -26,7 +27,7 @@ def integrate(source_download_folder, target_music_folder, ask_before_copy):
         return wanted_target_album_folder
 
 
-def create_interpret_folder_if_necessary(interpret, target_music_folder, ask_before_copy):
+def create_interpret_folder_if_necessary(interpret: str, target_music_folder: path, ask_before_copy: bool) -> path:
     target_interpret_folder = target_music_folder.joinpath(interpret)
     if target_interpret_folder.exists():
         print("The following Interpret folder will be used: {}".format(target_interpret_folder))
@@ -37,14 +38,14 @@ def create_interpret_folder_if_necessary(interpret, target_music_folder, ask_bef
     return target_interpret_folder
 
 
-def get_latest_folder(dir_path):
+def get_latest_folder(dir_path: path) -> str:
     files = [file for file in dir_path.listdir()]
     files.sort(key=lambda file: dir_path.joinpath(file).getctime(), reverse=True)
     return files[0]
 
 
 class IntegrationError(Exception):
-    def __init__(self, value):
+    def __init__(self, value: str):
         self.value = value
 
     def __str__(self):
